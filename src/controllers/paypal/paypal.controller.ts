@@ -28,8 +28,8 @@ export const payment = async (req: any, res: any) => {
       },
     ],
     redirect_urls: {
-      return_url: `http://localhost:5173/thankyou?orderId=${orderId}&supportTimeStart=${supportTimeStart}&supportTimeEnd=${supportTimeEnd}&note=${partsNote}&firstCall=${firstCall}`,
-      cancel_url: 'http://localhost:3001/cancel',
+      return_url: `${process.env.CLIENT_URL}/thankyou?orderId=${orderId}&supportTimeStart=${supportTimeStart}&supportTimeEnd=${supportTimeEnd}&note=${partsNote}&firstCall=${firstCall}`,
+      cancel_url: `${process.env.CLIENT_URL}/cancel`,
     },
   };
 

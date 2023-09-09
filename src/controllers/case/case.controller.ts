@@ -119,6 +119,11 @@ const getAllCases = async (req: Request, res: Response) => {
 
 		// const session: SessionData | undefined = getSession(token);
 		const session= { userEmail : req.body._email };
+		console.log(`get cases : ********  ${session.userEmail}`,req.headers['authorization']);
+
+		if(!session.userEmail){
+			return res.status(401).send("give me email NPC");
+		}
 
 		if (session) {
 			const cases = await findAllCases(session.userEmail);

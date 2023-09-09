@@ -19,10 +19,10 @@ const setUpOrder = async (req: Request, res: Response) => {
 
     // const token = req.cookies.accessToken;
     // const session: SessionData | undefined = getSession(token);
-    const session= true;
+    const session = true;
     if (session) {
       const orderId = createdOrder!._id;
-      console.log(`&&&&& email `,req.body._email);
+      console.log(`&&&&& email `, req.body._email);
       await addOrder(req.body._email, orderId);
       res.status(201).send(createdOrder);
     }
@@ -37,7 +37,7 @@ const getPlan = async (req: Request, res: Response) => {
 
     // const token = req.cookies.accessToken;
     // const session: SessionData | undefined = getSession(token);
-    const session = req.body._email ;
+    const session = req.body._email;
     if (session) {
       const plan = await fetchCyclistPlan(session);
       if (!plan) {

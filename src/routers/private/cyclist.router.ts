@@ -26,8 +26,8 @@ cyclistRouter.use((req:Request,res : Response,next : NextFunction)=>{
 
     const token = (req.headers['authorization']?.split(' ')?.pop());
 
-    console.log(`*********token=`,token);
-    console.log(`((((())))) route-path = ${req.url}`);
+    console.log(`*********token=`,token ? token.slice(10) : 'NoT FoUnD!!!!!');
+    console.log(`=======${req.url}======`);
 
     let decoded;
     try {

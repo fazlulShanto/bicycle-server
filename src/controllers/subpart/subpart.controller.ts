@@ -18,14 +18,16 @@ const addSubparts = async (req: Request, res: Response) => {
 
 const allSubpart = async (req: Request, res: Response) => {
   try {
-    const token = req.cookies.accessToken;
-    const session: SessionData | undefined = getSession(token);
-    if (token) {
-      res.status(200).send(allSubparts);
-      return;
-    }
+    // const token = req.cookies.accessToken;
+    // const session: SessionData | undefined = getSession(token);
+    // if (token) {
+    //   res.status(200).send(allSubparts);
+    //   return;
+    // }
 
-    res.status(200).send('Session not found!');
+    const result = await SubpartModel.find({}).exec();
+
+    return res.json(result);
   } catch (error) {
     console.error('Could not get plan!');
     res.status(500).send('Server Error!');

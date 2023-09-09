@@ -35,15 +35,17 @@ const findAllCases = async (email: string) => {
 		const cyclist = await findCyclistByEmail(email);
 		const technician = await findTechnicianByEmail(email);
 		if (cyclist && cyclist.role === 'cyclist') {
+
+			// console.log(`✨🎐🎗🖼🥼🥼🥼🎢🎢🕶🎨🖼🖼`,cyclist);
 			return await CaseModel.find({ cyclist: cyclist?._id }).populate({
 				path: 'order',
 				populate: 'bicycleParts',
 			});
 		} else {
-			return await CaseModel.find({ technician: technician?._id }).populate('cyclist').populate({ path: 'bicycle', populate: 'totalHealth' }).populate({
-				path: 'order',
-				populate: 'bicycleParts',
-			});
+			return await CaseModel.find({ technician: technician?._id })
+			.populate('cyclist')
+			.populate({ path: 'bicycle', populate: 'totalHealth' })
+			.populate({path: 'order',	populate: 'bicycleParts'});
 		}
 	} catch (error) {
 		console.log(error);

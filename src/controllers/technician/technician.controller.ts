@@ -37,7 +37,15 @@ const signUp = async (req: Request, res: Response) => {
       role,
     });
 
-    res.status(200).send(newTechnician);
+    // res.status(200).send(newTechnician);
+    const token = createSession(email);
+    res.cookie('accessToken', token, {
+      httpOnly: false,
+      secure: false,
+      sameSite: 'strict',
+    });
+
+    return res.status(200).send({ accessToken: token });
   } catch (error) {
     res.status(500).send('Server Error!');
   }
@@ -186,6 +194,7 @@ const setUpTechnician = async (req: Request, res: Response) => {
     // const session: SessionData | undefined = getSession(token);
     const session= { userEmail : req.body._email };
     if (session) {
+      console.log(subpartExpertise);
       const newTechnician = await addTechnicianDetails(session.userEmail, setTechnician);
       if (!newTechnician) res.status(401).send('Setting up technician failed!');
       res.status(201).send(newTechnician);
@@ -258,6 +267,8 @@ const findSubpartExpart = async (req: Request, res: Response) => {
 const availableSupportTime = async (req: Request, res: Response) => {
   try {
     const { subparts } = req.body;
+
+    console.log('$$$$$$$$=',req.body);
 
     // const token = req.cookies.accessToken;
     // const session: SessionData | undefined = getSession(token);

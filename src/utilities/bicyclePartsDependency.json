@@ -1,0 +1,86 @@
+[
+	{
+		"_id": "64d0cfccd7d5ed90771f8cd8",
+		"name": "TyresAndRim",
+		"roadConditionFactor": 0.2,
+		"dependentPartId": "",
+		"dependentPartName": ""
+	},
+	{
+		"_id": "64d0cfccd7d5ed90771f8cd9",
+		"name": "Brakes",
+		"roadConditionFactor": 0.8,
+		"dependentPartId": "",
+		"dependentPartName": ""
+	},
+	{
+		"_id": "64d0cfccd7d5ed90771f8cda",
+		"name": "GearShifters",
+		"roadConditionFactor": 0.6,
+		"dependentPartId": "",
+		"dependentPartName": ""
+	},
+	{
+		"_id": "64d0cfccd7d5ed90771f8cdc",
+		"name": "Chain",
+		"roadConditionFactor": 0.95,
+		"dependentPartId": "",
+		"dependentPartName": ""
+	},
+	{
+		"_id": "64d0cfccd7d5ed90771f8cdd",
+		"name": "CrankArm",
+		"roadConditionFactor": 0.5,
+		"dependentPartId": "",
+		"dependentPartName": ""
+	},
+	{
+		"_id": "64d0cfccd7d5ed90771f8ce1",
+		"name": "ChainStay",
+		"roadConditionFactor": 0.45,
+		"dependentPartId": "",
+		"dependentPartName": ""
+	},
+	{
+		"_id": "64d0cfccd7d5ed90771f8cd7",
+		"name": "BodyFrame",
+		"roadConditionFactor": 0.1,
+		"dependentPartId": "64d0cfccd7d5ed90771f8ce1",
+		"dependentPartName": "ChainStay"
+	},
+	{
+		"_id": "64d0cfccd7d5ed90771f8cdb",
+		"name": "HubAndDiscRotor",
+		"roadConditionFactor": 0.7,
+		"dependentPartId": "64d0cfccd7d5ed90771f8cd9",
+		"dependentPartName": "Brakes"
+	},
+	{
+		"_id": "64d0cfccd7d5ed90771f8cde",
+		"name": "FrontAndBackDerailleur",
+		"roadConditionFactor": 0.75,
+		"dependentPartId": "64d0cfccd7d5ed90771f8cda",
+		"dependentPartName": "GearShifters"
+	},
+	{
+		"_id": "64d0cfccd7d5ed90771f8cdf",
+		"name": "Pedal",
+		"roadConditionFactor": 0.55,
+		"dependentPartId": "64d0cfccd7d5ed90771f8cdd",
+		"dependentPartName": "CrankArm"
+	},
+	{
+		"_id": "64d0cfccd7d5ed90771f8ce0",
+		"name": "ChainRing",
+		"roadConditionFactor": 0.85,
+		"dependentPartId": "64d0cfccd7d5ed90771f8cdc",
+		"dependentPartName": "Chain"
+	},
+	{
+		"_id": "64d0cfccd7d5ed90771f8ce2",
+		"name": "RearCasette",
+		"roadConditionFactor": 0.9,
+		"dependentPartId": "64d0cfccd7d5ed90771f8cdc",
+		"dependentPartName": "Chain"
+	}
+]

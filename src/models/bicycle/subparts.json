@@ -1,0 +1,98 @@
+[
+  {
+    "_id": "64d0cfccd7d5ed90771f8cd7",
+    "name": "Body Frame",
+    "price": 150,
+    "depreciationRate": 0.4,
+    "category": "Frame",
+    "plan": []
+  },
+  {
+    "_id": "64d0cfccd7d5ed90771f8cd8",
+    "name": "Tyres And Rim",
+    "price": 30,
+    "depreciationRate": 0.65,
+    "category": "Wheel",
+    "plan": ["Qover"]
+  },
+  {
+    "_id": "64d0cfccd7d5ed90771f8cd9",
+    "name": "Brakes",
+    "price": 60,
+    "depreciationRate": 0.8,
+    "category": "Brake",
+    "plan": []
+  },
+  {
+    "_id": "64d0cfccd7d5ed90771f8cda",
+    "name": "Gear Shifters",
+    "price": 40,
+    "depreciationRate": 0.6,
+    "category": "DriveMechanics",
+    "plan": []
+  },
+  {
+    "_id": "64d0cfccd7d5ed90771f8cdb",
+    "name": "Hub And Disc Rotor",
+    "price": 45,
+    "depreciationRate": 0.7,
+    "category": "DriveMechanics",
+    "plan": []
+  },
+  {
+    "_id": "64d0cfccd7d5ed90771f8cdc",
+    "name": "Chain",
+    "price": 15,
+    "depreciationRate": 0.95,
+    "category": "DriveMechanics",
+    "plan": ["Qover"]
+  },
+  {
+    "_id": "64d0cfccd7d5ed90771f8cdd",
+    "name": "Crank Arm",
+    "price": 10,
+    "depreciationRate": 0.5,
+    "category": "DriveMechanics",
+    "plan": ["Qover"]
+  },
+  {
+    "_id": "64d0cfccd7d5ed90771f8cde",
+    "name": "Front And Back Derailleur",
+    "price": 25,
+    "depreciationRate": 0.75,
+    "category": "DriveMechanics",
+    "plan": []
+  },
+  {
+    "_id": "64d0cfccd7d5ed90771f8cdf",
+    "name": "Pedal",
+    "price": 8,
+    "depreciationRate": 0.55,
+    "category": "DriveMechanics",
+    "plan": ["Qover"]
+  },
+  {
+    "_id": "64d0cfccd7d5ed90771f8ce0",
+    "name": "Chain Ring",
+    "price": 20,
+    "depreciationRate": 0.85,
+    "category": "DriveMechanics",
+    "plan": []
+  },
+  {
+    "_id": "64d0cfccd7d5ed90771f8ce1",
+    "name": "Chain Stay",
+    "price": 30,
+    "depreciationRate": 0.45,
+    "category": "DriveMechanics",
+    "plan": []
+  },
+  {
+    "_id": "64d0cfccd7d5ed90771f8ce2",
+    "name": "Rear Casette",
+    "price": 40,
+    "depreciationRate": 0.9,
+    "category": "DriveMechanics",
+    "plan": []
+  }
+]

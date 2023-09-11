@@ -201,7 +201,7 @@ const setUpTechnician = async (req: Request, res: Response) => {
       return;
     }
 
-    res.status(401).send('Technician not Found!');
+   return res.status(401).send('Technician not Found!');
   } catch (error) {
     console.error('Could not set up technician!');
     res.status(500).send('Server Error !');

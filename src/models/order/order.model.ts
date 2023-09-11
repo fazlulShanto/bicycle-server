@@ -6,7 +6,7 @@ const orderSchema = new Schema({
   deliveryAddress: { type: String, required: true },
   contactNumber: { type: String, required: true },
   note: { type: String },
-  slot: { type: String, required: true },
+  slot: { type: String, required: false },
   totalPrice: { type: Number, required: true },
 });
 

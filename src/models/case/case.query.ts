@@ -59,4 +59,8 @@ const findCaseById = async (caseId: string) => {
 	});
 };
 
+export const updateCaseById = async (caseId: string) => {
+	return await CaseModel.findOneAndUpdate({ _id: caseId },{status : 'Finished'});
+};
+
 export { createNewCase, findAllCases, findCaseById };

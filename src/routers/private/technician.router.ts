@@ -8,7 +8,6 @@ import { decodeJWT } from '../../middlewares/sessionManagement';
 
 const technicianRouter = Router();
 
-
 technicianRouter.use((req:Request,res : Response,next : NextFunction)=>{
 
   const token = (req.headers['authorization']?.split(' ')?.pop());
@@ -35,7 +34,6 @@ technicianRouter.use((req:Request,res : Response,next : NextFunction)=>{
   // }
 });
 
-
 // public
 technicianRouter.post('/sign-up', technicianController.signUp);
 technicianRouter.post('/sign-in', technicianController.signIn);
@@ -59,6 +57,7 @@ technicianRouter.post(
 // case
 technicianRouter.get('/get-all-cases', caseController.getAllCases);
 technicianRouter.get('/get-case-by-id/:id', caseController.getCaseById);
+technicianRouter.get('/case/:id/close',caseController.closeCaseById);
 
 // order
 

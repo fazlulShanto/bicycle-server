@@ -33,7 +33,7 @@ const createBicycle = async (bicycle: Bicycle, lastMaintained: any) => {
   }
 };
 
-const getBicycleById = async (bicycleId: Types.ObjectId) => {
+const getBicycleById = async (bicycleId : Types.ObjectId) => {
   try {
     const bicycle = await BicycleModel.findById({ _id: bicycleId }).populate(
       'bicycleParts.subpart'
@@ -46,6 +46,7 @@ const getBicycleById = async (bicycleId: Types.ObjectId) => {
     console.error(error);
   }
 };
+
 
 const findBicycleHealthById = async (bicycleId: Types.ObjectId) => {
   try {

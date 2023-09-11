@@ -9,6 +9,7 @@ import { technicianRouter } from './private/technician.router';
 import * as paymentController from '../controllers/paypal/paypal.controller';
 import { decodeJWT } from '../middlewares/sessionManagement';
 import multerUploader, { uploadFileToCloud } from '../controllers/cloudinary/cloudinary.controller';
+import { YoutubeSearch ,getSubPartsCategories,getPartsCategories} from '../controllers/others/others.controller';
 
 
 // router.use(generator);
@@ -21,7 +22,10 @@ interface CustomRequest extends Request{
 router.post('/api/fileup',
 multerUploader.array('file'),
 uploadFileToCloud
-)
+);
+
+router.post('/api/yt-search',YoutubeSearch);
+router.post('/api/parts',getPartsCategories);
 
 
 router.use('/cyclist', cyclistRouter);

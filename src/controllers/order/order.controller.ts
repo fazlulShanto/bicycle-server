@@ -22,12 +22,12 @@ const setUpOrder = async (req: Request, res: Response) => {
     const session = true;
     if (session) {
       const orderId = createdOrder!._id;
-      console.log(`&&&&& email `, req.body._email);
+      // console.log(`&&&&& email `, req.body._email);
       await addOrder(req.body._email, orderId);
       res.status(201).send(createdOrder);
     }
   } catch (error) {
-    console.error('Creating order failed!');
+    // console.error('Creating order failed!');
     res.status(500).send('Server Error!');
   }
 };

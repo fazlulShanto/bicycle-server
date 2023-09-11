@@ -3,15 +3,15 @@ import { Schema } from '../database';
 const supportTimeSchema = new Schema({
   slotName: {
     type: String,
-    required: true,
+    required: false,
   },
   slotTime: {
     type: String,
-    required: true,
+    required: false,
   },
   timeStamp: {
     type: Date,
-    required: true,
+    required: false,
   },
 });
 

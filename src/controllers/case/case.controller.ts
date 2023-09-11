@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { createNewCase, findAllCases, findCaseById } from '../../models/case/case.query';
+import { createNewCase, findAllCases, findCaseById, updateCaseById } from '../../models/case/case.query';
 import { getSession } from '../../middlewares/sessionManagement';
 import { SessionData } from '../../interfaces/session.interface';
 import { findCyclistByEmail } from '../../models/cyclist/cyclist.query';
@@ -7,11 +7,15 @@ import { findSubpartTechnician, findTechnicianById } from '../../models/technici
 import { findOrderById } from '../../models/order/order.query';
 import { Types } from '../../models/database';
 import { CaseModel } from '../../models/case/case.model';
+import { getBicycleById, updateBicycle } from '../../models/bicycle/bicycle.query';
+import moment from 'moment';
+
+
 
 const createPassiveCase = async (req: Request, res: Response) => {
 	console.log(req.body);
 	try {
-		const { type, tags, note, supportTime, interventionDetails, orderId } = req.body;
+		const { type, tags, note, supportTime, interventionDetails, orderId ,videoURL} = req.body;
 
 		// const token = req.cookies.accessToken;
 		// const session: SessionData | undefined = getSession(token);
@@ -25,7 +29,7 @@ const createPassiveCase = async (req: Request, res: Response) => {
 			}
 
 			const order = await findOrderById(new Types.ObjectId(orderId));
-
+			console.log('🎨🎗🎋',order);
 			if (order) {
 				const subparts = order.bicycleParts;
 				const technician = await findSubpartTechnician(subparts);
@@ -35,7 +39,7 @@ const createPassiveCase = async (req: Request, res: Response) => {
 					cyclist: cyclist._id,
 					bicycle: cyclist.bicycle,
 					technician: technicianId,
-
+					videoURL,
 					order: orderId,
 					status: 'ongoing',
 					type,
@@ -157,6 +161,65 @@ const getCaseNumber = async (req: Request, res: Response) => {
 	try {
 		const caseResult = await CaseModel.find({});
 		res.status(200).send({ caseNumber: caseResult.length + 1 });
+	} catch (error) {
+		console.error('Could not find case!');
+		res.status(502).send('Could not find case!');
+	}
+};
+
+export const closeCaseById = async (req: Request, res: Response) => {
+	try {
+		const caseId = req.params.id;
+
+		if (!caseId) {
+			res.status(402).send('Case id not found!');
+			return;
+		}
+
+		// update case status
+		const updateCase = await updateCaseById(caseId);
+		// console.log('--->',updateCase,caseId)
+		
+		if(updateCase?.order){
+			// console.log('✨🎉🎆🧨');
+			const bicycleId = updateCase.bicycle;
+			const _order = await findOrderById(updateCase?.order);
+			//console.log('order data',_order)
+			const partIds = _order?.bicycleParts;
+			// get bicycle and update parts health
+			const  _bicycle = await getBicycleById(bicycleId!);
+			// 64faff3eb2eb98484868c94d=> parts id
+			// console.log('bicycle data',_bicycle);
+			
+			if(_bicycle && _bicycle['bicycleParts']){
+				
+				for(let i = 0; i<_bicycle!['bicycleParts']?.length!;i++){
+					
+					// console.log('✨🎉🎆🧨');
+					const singlePart = _bicycle!['bicycleParts'][i];
+					if(partIds?.includes(singlePart.subpart._id)){
+						_bicycle!['bicycleParts'][i].health = 100;
+						// console.log(_bicycle!['bicycleParts'][i].health);
+					}
+				}
+			}
+
+
+			
+			// console.log(_bicycle);
+			const dbUpdate = await updateBicycle(_bicycle?._id!,_bicycle!,moment(Date.now()));
+
+			return res.json(dbUpdate);
+			// const 
+		}
+		//get sub parts from order details
+		//update cycle parts health
+
+
+
+
+		// const caseResult = await findCaseById(caseId);
+		return res.status(200).send("nigga");
 	} catch (error) {
 		console.error('Could not find case!');
 		res.status(502).send('Could not find case!');

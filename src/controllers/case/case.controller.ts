@@ -10,8 +10,6 @@ import { CaseModel } from '../../models/case/case.model';
 import { getBicycleById, updateBicycle } from '../../models/bicycle/bicycle.query';
 import moment from 'moment';
 
-
-
 const createPassiveCase = async (req: Request, res: Response) => {
 	console.log(req.body);
 	try {
@@ -29,7 +27,7 @@ const createPassiveCase = async (req: Request, res: Response) => {
 			}
 
 			const order = await findOrderById(new Types.ObjectId(orderId));
-			console.log('🎨🎗🎋',order);
+			// console.log('🎨🎗🎋',order);
 			if (order) {
 				const subparts = order.bicycleParts;
 				const technician = await findSubpartTechnician(subparts);
@@ -85,7 +83,7 @@ const createActiveCase = async (req: Request, res: Response) => {
 			if (!cyclist) {
 				return res.status(404).send('Cyclist not found.');
 			}
-			const technician = await findSubpartTechnician(subparts);
+			let technician = await findSubpartTechnician(subparts);
 			const technicianId = technician?._id;
 
 			const newCase = {
@@ -131,7 +129,20 @@ const getAllCases = async (req: Request, res: Response) => {
 
 		if (session) {
 			const cases = await findAllCases(session.userEmail);
-			res.status(200).send(cases);
+			if(cases){
+				console.log(cases);
+
+				if(cases.length){
+
+					res.status(200).send(cases);
+					return ;
+				}else{
+					res.send({"data":false});
+				}
+			}else{
+				return res.send({data :false});
+				return;
+			}
 		}
 	} catch (error) {
 		console.error('Could not get all cases!');

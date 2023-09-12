@@ -14,7 +14,7 @@ export const payment = async (req: any, res: any) => {
   const partsNote = note.split(' ').join('+');
 
   const [supportTimeStart, supportTimeEnd] = supportTime.split(' - ');
-
+  console.log(process.env.CLIENT_URL);
   const paymentDetails = {
     intent: 'sale',
     payer: { payment_method: 'paypal' },

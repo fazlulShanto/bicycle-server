@@ -78,6 +78,10 @@ const findSubpartTechnician = async (subparts: Types.ObjectId[]) => {
       const sortedTechnicians = techniciansWithMatches.map((entry) => entry!.technician);
       return sortedTechnicians[0];
     }
+    else{
+      const first = await TechnicianModel.find({}).exec();
+      return first[0];
+    }
   } catch (error) {
     console.log(error);
   }

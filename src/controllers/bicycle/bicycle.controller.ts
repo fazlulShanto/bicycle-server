@@ -17,7 +17,6 @@ import { addBicycle } from "../../models/cyclist/cyclist.query";
 
 
 import Subparts from "../../models/bicycle/subparts.json";
-import { bicycleSchema2 } from "../../models/bicycle/bicycle.model";
 import { SubpartModel } from "../../models/subpart/subpart.model";
 import { getAllSubpart } from "../../models/subpart/subpart.query";
 import { Subpart } from "../../interfaces/subpart.interface";
@@ -62,20 +61,23 @@ const setUpBicycle = async (req: Request, res: Response) => {
 		let lastRevisionMonth: number = purchaseMonth;
 		let lastRevisionYear: number = purchaseYear;
 
+		console.log('******=>',lastRevisionYear,lastRevisionMonth);
+		
 		if (isRevised) {
 			revisionMonth && (lastRevisionMonth = revisionMonth);
 			revisionYear && (lastRevisionYear = revisionYear);
 		}
 
+		
 		const lastRevisionDate = moment([
 			lastRevisionYear,
-			lastRevisionMonth - 1,
+			lastRevisionMonth ,
 		]);
 		console.log(lastRevisionDate);
 		const createdBicycle = await createBicycle(
 			newBicycle,
-			moment().format().toString()
-			// lastRevisionDate ?? moment().format()
+			// moment().format().toString()
+			lastRevisionDate ?? moment().format().toString()
 		);
 
 		// const token = req.cookies.accessToken;

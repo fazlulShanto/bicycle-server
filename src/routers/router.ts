@@ -12,7 +12,7 @@ import multerUploader, { uploadFileToCloud } from '../controllers/cloudinary/clo
 import { YoutubeSearch ,getSubPartsCategories,getPartsCategories} from '../controllers/others/others.controller';
 
 
-// router.use(generator);
+router.use(generator);
 router.get('/',(req,res)=> res.send("hello world"));
 
 interface CustomRequest extends Request{

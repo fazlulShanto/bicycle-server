@@ -9,7 +9,10 @@ moment().format();
 
 const createBicycle = async (bicycle: Bicycle, lastMaintained: any) => {
   try {
+    console.log('last =>',lastMaintained)
     const bicycleSubparts = await getAllSubpart();
+
+
 
     if (bicycleSubparts) {
       const BicycleParts: BicycleParts[] = bicycleSubparts.map((subpart) => ({

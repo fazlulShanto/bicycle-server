@@ -45,14 +45,22 @@ const calculatePartsHealth = (
   recreationalCommutetotalDistance: number,
   recreationalCommutedActivityType: string[]
 ) => {
+//  console.log(`dependency part`,bicycleSubParts[0].subpart._id);
   bicycleDependency.forEach((dependencyPart) => {
+
+   
+
     const subpart = bicycleSubParts.filter((bicycleSubPart) => {
+      console.log(`test result =`,String(bicycleSubPart.subpart._id) , dependencyPart._id);
       return String(bicycleSubPart.subpart._id) === dependencyPart._id;
     });
-
-    if (subpart.length === 0) return;
-
+    
+    // console.log(`selected subpart : `,subpart);
+    // if (subpart) return;
+    // console.log(`inside calculatePartsHealth#######`);
+    
     const lastRevisionDate = moment(subpart[0].lastMaintained);
+    
 
     const totalDailyCommutedPavedDistance = getDistance(
       2,
@@ -60,15 +68,15 @@ const calculatePartsHealth = (
       dailyCommuteDays,
       dailyCommutetotalDistance,
       1 - dailyCommutedUnpavedRoad / 100
-    );
-
-    const totalDailyCommutedUnpavedDistance = getDistance(
+      );
+      
+      const totalDailyCommutedUnpavedDistance = getDistance(
       2,
       lastRevisionDate,
       dailyCommuteDays,
       dailyCommutetotalDistance,
       dailyCommutedUnpavedRoad / 100
-    );
+      );
 
     let totalRecreationalCommutedPavedDistance = 0;
     let totalRecreationalCommutedUnpavedDistance = 0;
@@ -102,6 +110,8 @@ const calculatePartsHealth = (
       totalDailyCommutedPavedDistance + totalRecreationalCommutedPavedDistance;
     const totalUnpavedDistance =
       totalDailyCommutedUnpavedDistance + totalRecreationalCommutedUnpavedDistance;
+      
+      console.log(`bicycle subpart =>`,subpart);
 
     damageCalculateForOnePart(
       subpart[0],
@@ -129,10 +139,14 @@ const getDistance = (
 
 
 const bicycleHealthAlgorithm = async () => {
+
+
+  // console.log(`calling bicycle algorithm`);
+
   const allBicycle = await getAllBicycle();
 
   
-
+  // console.log(`list: =>`,allBicycle);
 
   
   
@@ -149,7 +163,8 @@ const bicycleHealthAlgorithm = async () => {
       }
 
   // console.log(`all bicycle list 1=`,allBicycle?.length);
-      bicycle.bicycleParts &&
+      if(bicycle?.bicycleParts ){
+        // console.log(`bicycle parts : =>`,bicycle.bicycleParts);
         calculatePartsHealth(
           bicycle.bicycleParts,
           bicycle.dailyCommute?.days.length,
@@ -160,6 +175,9 @@ const bicycleHealthAlgorithm = async () => {
           bicycle.recreationalCommute!?.lengthOfRide,
           bicycle.recreationalCommute!?.activityType
         );
+        // console.log(`i am at the end `,bicycle.bicycleParts);
+      }
+        
 
       let totalSubpartHealth = 0;
       bicycle.bicycleParts!?.forEach((part) => {

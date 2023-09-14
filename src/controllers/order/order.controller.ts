@@ -24,6 +24,9 @@ const setUpOrder = async (req: Request, res: Response) => {
       const orderId = createdOrder!._id;
       // console.log(`&&&&& email `, req.body._email);
       await addOrder(req.body._email, orderId);
+
+      console.log(`created order ${orderId} for ${req.body?._email}`);
+      
       res.status(201).send(createdOrder);
     }
   } catch (error) {
